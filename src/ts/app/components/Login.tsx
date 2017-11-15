@@ -11,7 +11,7 @@ class Login extends React.Component<any, {}> {
               <img
                 className="img-responsive"
                 alt="formed app logo"
-                src={require("../images/logo-wide.png")}
+                src={require("../../../assets/images/logo-wide.png")}
               />
               <fieldset className="form-group">
                 <input
