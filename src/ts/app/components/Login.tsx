@@ -8,7 +8,11 @@ class Login extends React.Component<any, {}> {
         <div className="row">
           <div className="col-xs-8 col-xs-offset-2">
             <form className="login">
-              <img className="img-responsive" alt="formed app logo" />
+              <img
+                className="img-responsive"
+                alt="formed app logo"
+                src={require("../images/logo-wide.png")}
+              />
               <fieldset className="form-group">
                 <input
                   type="text"
