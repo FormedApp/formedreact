@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router";
 import { withRouter } from "react-router-dom";
 import { registerUser, requestSession } from "../login.actions";
-
-
+import Login from "../../app/components/Login";
 
 class LoginComponent extends React.Component<any, {}> {
   private username: string;
@@ -19,7 +18,7 @@ class LoginComponent extends React.Component<any, {}> {
 
     this.state = {
       fireRedirect: false,
-      error: false,
+      error: false
     };
   }
 
@@ -31,7 +30,7 @@ class LoginComponent extends React.Component<any, {}> {
     event.preventDefault();
     const credentials = {
       username: this.username,
-      password: this.password,
+      password: this.password
     };
     console.log(this.props);
     if (this.props.match.path === "/register") {
@@ -61,41 +60,43 @@ class LoginComponent extends React.Component<any, {}> {
 
   public render() {
     console.log(this.props);
-    const fireRedirect = (this.props.session && this.props.session.user.token !== "") ? true : false;
+    const fireRedirect =
+      this.props.session && this.props.session.user.token !== "" ? true : false;
     const disabled = this.props.session.authenticating;
     return (
-      <div className="franke-login-form uk-full-height ">
-        <form onSubmit={this.handleSubmit}>
-          <fieldset className="uk-fieldset">
-            <div className="uk-margin">
-              <input
-                className="uk-input"
-                type="text"
-                placeholder="Username"
-                onChange={this.handleUsername}
-                disabled={disabled}
-              />
-            </div>
-            <div className="uk-margin">
-              <input
-                className="uk-input"
-                type="password"
-                placeholder="Password"
-                onChange={this.handlePassword}
-                disabled={disabled}
-              />
-            </div>
-            <button
-              className="uk-button uk-button-default uk-width-1-1 uk-text-uppercase"
-              type="submit"
-              disabled={disabled}
-            >
-              Login
-            </button>
-          </fieldset>
-        </form>
-        {fireRedirect && <Redirect to={"/"} />}
-      </div>
+      <Login />
+      // <div className="franke-login-form uk-full-height ">
+      //   <form onSubmit={this.handleSubmit}>
+      //     <fieldset className="uk-fieldset">
+      //       <div className="uk-margin">
+      //         <input
+      //           className="uk-input"
+      //           type="text"
+      //           placeholder="Username"
+      //           onChange={this.handleUsername}
+      //           disabled={disabled}
+      //         />
+      //       </div>
+      //       <div className="uk-margin">
+      //         <input
+      //           className="uk-input"
+      //           type="password"
+      //           placeholder="Password"
+      //           onChange={this.handlePassword}
+      //           disabled={disabled}
+      //         />
+      //       </div>
+      //       <button
+      //         className="uk-button uk-button-default uk-width-1-1 uk-text-uppercase"
+      //         type="submit"
+      //         disabled={disabled}
+      //       >
+      //         Login
+      //       </button>
+      //     </fieldset>
+      //   </form>
+      //   {fireRedirect && <Redirect to={"/"} />}
+      // </div>
     );
   }
 }
@@ -105,7 +106,9 @@ interface StateFromProps {
 }
 
 const mapStateToProps = (state: any) => ({
-  session: state.session,
+  session: state.session
 });
 
-export default connect<StateFromProps, null, any>(mapStateToProps)((LoginComponent));
+export default connect<StateFromProps, null, any>(mapStateToProps)(
+  LoginComponent
+);

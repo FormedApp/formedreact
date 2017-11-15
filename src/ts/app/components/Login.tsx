@@ -31,11 +31,15 @@ class Login extends React.Component<any, {}> {
                 </p>
               </fieldset>
               <fieldset className="form-group">
-                <input
+                {/* <input
                   type="button"
                   value="Login"
                   className="btn btn-primary btn-block"
-                />
+                  onClick={() => console.log("Login Clicked!!")}
+                /> */}
+                <a href="/" type="button" className="btn btn-primary btn-block">
+                  Login
+                </a>
               </fieldset>
               <p className="text-center">
                 <a href="#">Need an account?</a>
