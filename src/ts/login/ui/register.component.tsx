@@ -5,13 +5,12 @@ import { withRouter } from "react-router-dom";
 import { registerUser, requestSession } from "../login.actions";
 
 interface User {
-  username: string;
   firstName: string;
   lastName: string;
   email: string;
 }
 
-class LoginComponent extends React.Component<any, {}> {
+class RegisterComponent extends React.Component<any, {}> {
   private username: string;
   private password: string;
   private confirmPassword: string;
@@ -36,6 +35,11 @@ class LoginComponent extends React.Component<any, {}> {
 
   public componentDidMount() {
     this.username = "";
+    this.user = {
+        firstName: "",
+        lastName: "",
+        email: "",
+    };
   }
 
   public handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
@@ -198,5 +202,5 @@ const mapStateToProps = (state: any) => ({
 });
 
 export default connect<StateFromProps, null, any>(mapStateToProps)(
-  LoginComponent,
+  RegisterComponent,
 );
