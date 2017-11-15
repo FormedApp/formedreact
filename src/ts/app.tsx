@@ -1,15 +1,16 @@
-import NotFoundContainer from "./app/ui/notfound.container";
-import HomeContainer from "./app/ui/home.container";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { addLocaleData, IntlProvider } from "react-intl";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { configureStore } from './app/app.store';
-import LoginComponent from './login/ui/login.component';
+import { configureStore } from "./app/app.store";
+import HomeContainer from "./app/ui/home.container";
+import NotFoundContainer from "./app/ui/notfound.container";
+import LoginComponent from "./login/ui/login.component";
+import RegisterComponent from "./login/ui/register.component";
 
-import "../styles/styles.scss";
 import { Switch } from "react-router";
+import "../styles/styles.scss";
 
 const store = configureStore();
 
@@ -23,7 +24,7 @@ const renderApp = () => {
               <Switch>
                 <Route exact path="/" component={HomeContainer} />
                 <Route exact path="/login" component={LoginComponent} />
-                <Route exact path="/register" component={LoginComponent} />
+                <Route exact path="/register" component={RegisterComponent} />
                 <Route component={NotFoundContainer} />
               </Switch>
             </div>

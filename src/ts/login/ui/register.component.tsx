@@ -4,16 +4,28 @@ import { Redirect } from "react-router";
 import { withRouter } from "react-router-dom";
 import { registerUser, requestSession } from "../login.actions";
 
-class LoginComponent extends React.Component<any, {}> {
+interface User {
+  firstName: string;
+  lastName: string;
+  email: string;
+}
+
+class RegisterComponent extends React.Component<any, {}> {
   private username: string;
   private password: string;
+  private confirmPassword: string;
+  private user: User;
 
   constructor(props: any) {
     super(props);
 
     this.handlePassword = this.handlePassword.bind(this);
+    this.handleConfirmPassword = this.handleConfirmPassword.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleUsername = this.handleUsername.bind(this);
+    this.handleFirstName = this.handleFirstName.bind(this);
+    this.handleLastName = this.handleLastName.bind(this);
+    this.handleEmail = this.handleEmail.bind(this);
 
     this.state = {
       fireRedirect: false,
@@ -23,6 +35,11 @@ class LoginComponent extends React.Component<any, {}> {
 
   public componentDidMount() {
     this.username = "";
+    this.user = {
+        firstName: "",
+        lastName: "",
+        email: "",
+    };
   }
 
   public handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
@@ -30,8 +47,9 @@ class LoginComponent extends React.Component<any, {}> {
     const credentials = {
       username: this.username,
       password: this.password,
+      user: this.user,
     };
-    this.props.dispatch(requestSession(credentials));
+    this.props.dispatch(registerUser(credentials));
   }
 
   public handleUsername(event: React.SyntheticEvent<HTMLInputElement>) {
@@ -50,6 +68,42 @@ class LoginComponent extends React.Component<any, {}> {
       return;
     }
     this.password = value;
+  }
+
+  public handleConfirmPassword(event: React.SyntheticEvent<HTMLInputElement>) {
+    const target = event.target as HTMLInputElement;
+    const value = target.value.length > 0 ? target.value : "";
+    if (value.length < 1) {
+      return;
+    }
+    this.confirmPassword = value;
+  }
+
+  public handleFirstName(event: React.SyntheticEvent<HTMLInputElement>) {
+    const target = event.target as HTMLInputElement;
+    const value = target.value.length > 0 ? target.value : "";
+    if (value.length < 1) {
+      return;
+    }
+    this.user.firstName = value;
+  }
+
+  public handleLastName(event: React.SyntheticEvent<HTMLInputElement>) {
+    const target = event.target as HTMLInputElement;
+    const value = target.value.length > 0 ? target.value : "";
+    if (value.length < 1) {
+      return;
+    }
+    this.user.lastName = value;
+  }
+
+  public handleEmail(event: React.SyntheticEvent<HTMLInputElement>) {
+    const target = event.target as HTMLInputElement;
+    const value = target.value.length > 0 ? target.value : "";
+    if (value.length < 1) {
+      return;
+    }
+    this.user.email = value;
   }
 
   public render() {
@@ -79,14 +133,47 @@ class LoginComponent extends React.Component<any, {}> {
               <fieldset className="form-group">
                 <input
                   className="form-control"
+                  type="text"
+                  placeholder="E-Mail"
+                  onChange={this.handleEmail}
+                  disabled={disabled}
+                />
+              </fieldset>
+              <fieldset className="form-group">
+                <input
+                  className="form-control"
+                  type="text"
+                  placeholder="First Name"
+                  onChange={this.handleFirstName}
+                  disabled={disabled}
+                />
+              </fieldset>
+              <fieldset className="form-group">
+                <input
+                  className="form-control"
+                  type="text"
+                  placeholder="Last Name"
+                  onChange={this.handleLastName}
+                  disabled={disabled}
+                />
+              </fieldset>
+              <fieldset className="form-group">
+                <input
+                  className="form-control"
                   type="password"
                   placeholder="Password"
                   onChange={this.handlePassword}
                   disabled={disabled}
                 />
-                <p>
-                  <a href="/forgot-password">Forgot password?</a>
-                </p>
+              </fieldset>
+              <fieldset className="form-group">
+                <input
+                  className="form-control"
+                  type="password"
+                  placeholder="Confirm Password"
+                  onChange={this.handleConfirmPassword}
+                  disabled={disabled}
+                />
               </fieldset>
               <fieldset className="form-group">
                 <button
@@ -94,12 +181,9 @@ class LoginComponent extends React.Component<any, {}> {
                   type="submit"
                   disabled={disabled}
                 >
-                  Login
+                  Register
                 </button>
               </fieldset>
-              <p className="text-center">
-                <a href="/register">Need an account?</a>
-              </p>
             </form>
           </div>
         </div>
@@ -118,5 +202,5 @@ const mapStateToProps = (state: any) => ({
 });
 
 export default connect<StateFromProps, null, any>(mapStateToProps)(
-  LoginComponent,
+  RegisterComponent,
 );
