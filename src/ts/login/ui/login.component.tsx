@@ -64,39 +64,39 @@ class LoginComponent extends React.Component<any, {}> {
       this.props.session && this.props.session.user.token !== "" ? true : false;
     const disabled = this.props.session.authenticating;
     return (
-      <Login />
-      // <div className="franke-login-form uk-full-height ">
-      //   <form onSubmit={this.handleSubmit}>
-      //     <fieldset className="uk-fieldset">
-      //       <div className="uk-margin">
-      //         <input
-      //           className="uk-input"
-      //           type="text"
-      //           placeholder="Username"
-      //           onChange={this.handleUsername}
-      //           disabled={disabled}
-      //         />
-      //       </div>
-      //       <div className="uk-margin">
-      //         <input
-      //           className="uk-input"
-      //           type="password"
-      //           placeholder="Password"
-      //           onChange={this.handlePassword}
-      //           disabled={disabled}
-      //         />
-      //       </div>
-      //       <button
-      //         className="uk-button uk-button-default uk-width-1-1 uk-text-uppercase"
-      //         type="submit"
-      //         disabled={disabled}
-      //       >
-      //         Login
-      //       </button>
-      //     </fieldset>
-      //   </form>
-      //   {fireRedirect && <Redirect to={"/"} />}
-      // </div>
+      // <Login />
+      <div className="franke-login-form uk-full-height ">
+        <form onSubmit={this.handleSubmit}>
+          <fieldset className="uk-fieldset">
+            <div className="uk-margin">
+              <input
+                className="uk-input"
+                type="text"
+                placeholder="Username"
+                onChange={this.handleUsername}
+                disabled={disabled}
+              />
+            </div>
+            <div className="uk-margin">
+              <input
+                className="uk-input"
+                type="password"
+                placeholder="Password"
+                onChange={this.handlePassword}
+                disabled={disabled}
+              />
+            </div>
+            <button
+              className="uk-button uk-button-default uk-width-1-1 uk-text-uppercase"
+              type="submit"
+              disabled={disabled}
+            >
+              Login
+            </button>
+          </fieldset>
+        </form>
+        {fireRedirect && <Redirect to={"/"} />}
+      </div>
     );
   }
 }
