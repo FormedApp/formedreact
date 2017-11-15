@@ -17,7 +17,7 @@ class LoginComponent extends React.Component<any, {}> {
 
     this.state = {
       fireRedirect: false,
-      error: false,
+      error: false
     };
   }
 
@@ -29,7 +29,7 @@ class LoginComponent extends React.Component<any, {}> {
     event.preventDefault();
     const credentials = {
       username: this.username,
-      password: this.password,
+      password: this.password
     };
     this.props.dispatch(requestSession(credentials));
   }
@@ -103,7 +103,7 @@ class LoginComponent extends React.Component<any, {}> {
             </form>
           </div>
         </div>
-        {fireRedirect && <Redirect to={"/dashboard"} />}
+        {fireRedirect && <Redirect to={"/community"} />}
       </div>
     );
   }
@@ -114,9 +114,9 @@ interface StateFromProps {
 }
 
 const mapStateToProps = (state: any) => ({
-  session: state.session,
+  session: state.session
 });
 
 export default connect<StateFromProps, null, any>(mapStateToProps)(
-  LoginComponent,
+  LoginComponent
 );
