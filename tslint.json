@@ -1,15 +1,14 @@
 {
     "defaultSeverity": "error",
-    "extends": [
-        "tslint:recommended"
-    ],
+    "extends": ["tslint:recommended"],
     "jsRules": {},
     "rules": {
         "interface-name": false,
         "no-console": false,
         "object-literal-sort-keys": false,
         "one-line": false,
-        "max-line-length": [false]
+        "max-line-length": [false],
+        "trailing-comma": [false, { "multiline": "never", "singleline": "never" }]
     },
     "rulesDirectory": []
 }

@@ -29,16 +29,16 @@ class RegisterComponent extends React.Component<any, {}> {
 
     this.state = {
       fireRedirect: false,
-      error: false,
+      error: false
     };
   }
 
   public componentDidMount() {
     this.username = "";
     this.user = {
-        firstName: "",
-        lastName: "",
-        email: "",
+      firstName: "",
+      lastName: "",
+      email: ""
     };
   }
 
@@ -47,7 +47,7 @@ class RegisterComponent extends React.Component<any, {}> {
     const credentials = {
       username: this.username,
       password: this.password,
-      user: this.user,
+      user: this.user
     };
     this.props.dispatch(registerUser(credentials));
   }
@@ -198,9 +198,9 @@ interface StateFromProps {
 }
 
 const mapStateToProps = (state: any) => ({
-  session: state.session,
+  session: state.session
 });
 
 export default connect<StateFromProps, null, any>(mapStateToProps)(
-  RegisterComponent,
+  RegisterComponent
 );

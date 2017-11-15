@@ -1,8 +1,8 @@
+import axios from "axios";
 import {applyMiddleware, combineReducers, compose, createStore, Store} from "redux";
-import {createLogicMiddleware} from 'redux-logic';
 import logger from "redux-logger";
-import loginLogics from '../login/login.logic';
-import axios from 'axios';
+import {createLogicMiddleware} from "redux-logic";
+import loginLogics from "../login/login.logic";
 import {session} from "../login/login.state";
 
 const deps = { // injected dependencies for logic

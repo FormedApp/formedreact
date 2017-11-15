@@ -103,7 +103,7 @@ class LoginComponent extends React.Component<any, {}> {
             </form>
           </div>
         </div>
-        {fireRedirect && <Redirect to={"/dashboard"} />}
+        {fireRedirect && <Redirect to={"/community"} />}
       </div>
     );
   }
@@ -118,5 +118,5 @@ const mapStateToProps = (state: any) => ({
 });
 
 export default connect<StateFromProps, null, any>(mapStateToProps)(
-  LoginComponent,
+  LoginComponent
 );
