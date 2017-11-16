@@ -2,28 +2,31 @@ import * as _ from "lodash";
 
 import { Action } from "../app/app.store";
 
+import { User } from "../common/user.model";
 import { FAIL_SESSION, RECEIVE_SESSION } from "../login/login.actions";
 
 export interface SessionState {
-    /**
-     * Flag indicating whether or not we have an authentication request in flight
-     * NOTE: this will only be true when the user is explicitly logging in/verifying
-     */
     authenticating: boolean;
-
-    /**
-     * The session we are operating with
-     */
-    user: any;
+    token: string;
+    user: User;
 }
 
-export const initialUser: any = {
-    success: "",
-    token: "",
+export const initialUser: User = {
+    id: "",
+    username: "",
+    email: "",
+    first_name: "",
+    last_name: "",
+    groups: [],
+    roles: [],
+    password: "",
+    created_at: new Date(),
+    updated_at: new Date()
 };
 
 const initialState: SessionState = {
     authenticating: false,
+    token: "",
     user: initialUser,
 };
 
@@ -35,13 +38,14 @@ export const session = (state: SessionState = initialState, action: Action): Ses
         // });
         case RECEIVE_SESSION:
         return _.assign({}, state, {
-                user: action.payload,
+                user: action.payload.user,
+                token: action.payload.token,
                 authenticating: false,
             });
         case FAIL_SESSION:
         return _.assign({}, state, {
             authenticating: false,
-        });   
+        });
         default:
             return state;
     }

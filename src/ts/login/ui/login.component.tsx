@@ -55,7 +55,7 @@ class LoginComponent extends React.Component<any, {}> {
   public render() {
     console.log(this.props);
     const fireRedirect =
-      this.props.session && this.props.session.user.token !== "" ? true : false;
+      this.props.session && this.props.session.token !== "" ? true : false;
     const disabled = this.props.session.authenticating;
     return (
       <div id="login" className="container">
