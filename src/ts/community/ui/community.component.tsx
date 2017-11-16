@@ -1,15 +1,20 @@
 import * as React from "react";
-import { connect } from "react-redux";
 import NavBar from "../../common/ui/nav.bar.component";
 class Community extends React.Component<any, {}> {
+  private entry: string;
+  constructor(props: any) {
+    super(props);
+  }
+
   public render() {
+    // console.log(this.props);
     return (
       <div>
         <NavBar />
-        <div>Community Page</div>
+        Community Page
       </div>
     );
   }
 }
 
-export default connect()(Community);
+export default Community;

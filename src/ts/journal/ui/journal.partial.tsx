@@ -1,7 +1,7 @@
 import * as React from "react";
 
 class JournalEntryComponent extends React.Component<any, {}> {
-    private entry: string;
+  private entry: string;
   constructor(props: any) {
     super(props);
   }
@@ -9,7 +9,7 @@ class JournalEntryComponent extends React.Component<any, {}> {
   public handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
     const entry = {
-      entry: this.entry,
+      entry: this.entry
     };
     // this.props.dispatch(submitJournalEntry(entry));
   }
@@ -21,7 +21,7 @@ class JournalEntryComponent extends React.Component<any, {}> {
     } else {
       this.entry = "";
     }
-    this.setState({update: true});
+    this.setState({ update: true });
   }
 
   public render() {
@@ -39,13 +39,10 @@ class JournalEntryComponent extends React.Component<any, {}> {
                 <textarea
                   className="form-control"
                   onChange={this.handleJournalEntry}
-                ></textarea>
+                />
               </fieldset>
               <fieldset className="form-group">
-                <button
-                  className="btn btn-primary btn-block"
-                  type="submit"
-                >
+                <button className="btn btn-primary btn-block" type="submit">
                   Save Entry
                 </button>
               </fieldset>
@@ -62,7 +59,7 @@ interface StateFromProps {
 }
 
 const mapStateToProps = (state: any) => ({
-  session: state.session,
+  session: state.session
 });
 
 export default JournalEntryComponent;
