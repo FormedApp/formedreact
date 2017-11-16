@@ -2,8 +2,8 @@ import axios from "axios";
 import {applyMiddleware, combineReducers, compose, createStore, Store} from "redux";
 import logger from "redux-logger";
 import {createLogicMiddleware} from "redux-logic";
-import loginLogics from "../login/login.logic";
 import {session} from "../login/login.state";
+import logic from "./root.logic";
 
 const deps = { // injected dependencies for logic
     httpClient: axios
@@ -25,7 +25,7 @@ const reducers = combineReducers({
     session
 });
 
-const logicMiddle = createLogicMiddleware(loginLogics, deps);
+const logicMiddle = createLogicMiddleware(logic, deps);
 
 export const configureStore = (): Store<AppState> => {
     /*
