@@ -1,6 +1,5 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { addLocaleData, IntlProvider } from "react-intl";
 import { Provider } from "react-redux";
 import { Switch } from "react-router";
 import { BrowserRouter as Router, Route } from "react-router-dom";
