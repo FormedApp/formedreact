@@ -13,7 +13,8 @@ class Community extends React.Component<any, {}> {
   }
   // tslint:disable-next-line:arrow-parens
   public displayPosts = key => {
-    console.log(posts[key]);
+    const data = posts[key];
+    return data.user_id;
     // tslint:disable-next-line:semicolon
   };
 
