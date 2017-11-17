@@ -2,8 +2,7 @@ import axios from "axios";
 import * as React from "react";
 import { posts } from "../../../assets/scripts/posts.js";
 import NavBar from "../../common/ui/nav.bar.component";
-
-console.log(posts);
+import JournalEntryComponent from "../../journal/ui/journal.component";
 
 class Community extends React.Component<any, {}> {
   private entry: string;
@@ -22,8 +21,8 @@ class Community extends React.Component<any, {}> {
     return (
       <div>
         <NavBar />
-        Display Posts
-        {Object.keys(posts).map(this.displayPosts.bind(this))}
+        <div>Community Page</div>
+        <JournalEntryComponent />
       </div>
     );
   }

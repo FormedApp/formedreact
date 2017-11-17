@@ -1,17 +1,27 @@
 import * as React from "react";
+import { connect } from "react-redux";
+import { SessionState } from "../../login/login.state";
+import { submitJournalEntry } from "../journal.actions";
 
 class JournalEntryComponent extends React.Component<any, {}> {
   private entry: string;
+  private myFormRef: HTMLFormElement;
   constructor(props: any) {
     super(props);
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleJournalEntry = this.handleJournalEntry.bind(this);
   }
 
   public handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
+    const token = this.props.session.token;
     const entry = {
-      entry: this.entry
+      entry: this.entry,
+      token: this.props.session.token
     };
-    // this.props.dispatch(submitJournalEntry(entry));
+    this.props.dispatch(submitJournalEntry(entry));
+    this.myFormRef.reset();
   }
 
   public handleJournalEntry(event: React.SyntheticEvent<HTMLTextAreaElement>) {
@@ -26,10 +36,15 @@ class JournalEntryComponent extends React.Component<any, {}> {
 
   public render() {
     return (
-      <div id="login" className="container">
+      <div className="container">
         <div className="row">
           <div className="col-xs-8 col-xs-offset-2">
-            <form className="login" onSubmit={this.handleSubmit}>
+            <form
+              onSubmit={this.handleSubmit}
+              ref={(input: any) => {
+                this.myFormRef = input;
+              }}
+            >
               <img
                 className="img-responsive"
                 alt="formed app logo"
@@ -55,11 +70,13 @@ class JournalEntryComponent extends React.Component<any, {}> {
 }
 
 interface StateFromProps {
-  session: any;
+  session: SessionState;
 }
 
 const mapStateToProps = (state: any) => ({
   session: state.session
 });
 
-export default JournalEntryComponent;
+export default connect<StateFromProps, null, any>(mapStateToProps)(
+  JournalEntryComponent
+);

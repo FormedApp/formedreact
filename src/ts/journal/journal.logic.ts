@@ -7,9 +7,17 @@ const submitJournalLogic = createLogic<any>({
   type: SUBMIT_JOURNAL,
 
   async process({ httpClient, action }, dispatch, done) {
-    const entry = action.payload;
+    const entry = action.payload.entry;
+    const token = action.payload.token;
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": token,
+      }
+    };
+
     try {
-      const result = await httpClient.post(JOURNAL, entry);
+      const result = await httpClient.post(JOURNAL, JSON.stringify({entry}), config);
     } catch (err) {
       console.log(
         "Error trying to create journal entry",
