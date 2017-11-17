@@ -2,7 +2,9 @@ import axios from "axios";
 import {applyMiddleware, combineReducers, compose, createStore, Store} from "redux";
 import logger from "redux-logger";
 import {createLogicMiddleware} from "redux-logic";
-import {session} from "../login/login.state";
+import { journals, JournalState } from "../journal/journal.state";
+import {session, SessionState} from "../login/login.state";
+import { tracks, TracksState } from "../tracks/tracks.state";
 import logic from "./root.logic";
 
 const deps = { // injected dependencies for logic
@@ -12,7 +14,9 @@ const deps = { // injected dependencies for logic
 // tslint:disable-next-line:no-empty-interface
 export interface AppState {
     // TODO the various component state property types go in here
-    session: any;
+    session: SessionState;
+    journals: JournalState;
+    tracks: TracksState;
 }
 
 export interface Action {
@@ -22,7 +26,9 @@ export interface Action {
 
 const reducers = combineReducers({
     // TODO each components reducer goes in here
-    session
+    session,
+    journals,
+    tracks
 });
 
 const logicMiddle = createLogicMiddleware(logic, deps);

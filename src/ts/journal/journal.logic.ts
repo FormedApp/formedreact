@@ -1,5 +1,5 @@
 import { createLogic } from "redux-logic";
-import { SUBMIT_JOURNAL } from "./journal.actions";
+import { receiveJournals, REQUEST_JOURNALS, SUBMIT_JOURNAL } from "./journal.actions";
 
 const JOURNAL = "http://localhost:8081/api/journal";
 
@@ -18,6 +18,7 @@ const submitJournalLogic = createLogic<any>({
 
     try {
       const result = await httpClient.post(JOURNAL, JSON.stringify({entry}), config);
+      dispatch(receiveJournals(result.data.journals));
     } catch (err) {
       console.log(
         "Error trying to create journal entry",
@@ -29,4 +30,28 @@ const submitJournalLogic = createLogic<any>({
   },
 });
 
-export default [submitJournalLogic];
+const getUserJournalsLogic = createLogic<any>({
+  type: REQUEST_JOURNALS,
+
+  async process({ httpClient, action }, dispatch, done) {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": action.payload,
+      }
+    };
+
+    try {
+      const result = await httpClient.get(JOURNAL, config);
+      dispatch(receiveJournals(result.data.journals));
+    } catch (err) {
+      console.log(
+        "Error trying to get journal entries",
+        err,
+      );
+    }
+    done();
+  },
+});
+
+export default [submitJournalLogic, getUserJournalsLogic];

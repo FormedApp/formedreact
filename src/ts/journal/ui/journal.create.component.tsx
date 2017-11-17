@@ -16,7 +16,6 @@ class JournalEntryComponent extends React.Component<any, {}> {
 
   public handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
-    const token = this.props.session.token;
     const entry = {
       entry: this.entry,
       token: this.props.session.token
@@ -41,11 +40,6 @@ class JournalEntryComponent extends React.Component<any, {}> {
         <div className="row">
           <div className="col-xs-8 col-xs-offset-2">
             <form onSubmit={this.handleSubmit} ref={(input: any) => { this.myFormRef = input; }}>
-              <img
-                className="img-responsive"
-                alt="formed app logo"
-                src={require("../../../assets/images/logo-wide.png")}
-                />
               <fieldset className="form-group">
                 <textarea
                   className="form-control"

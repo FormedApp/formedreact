@@ -1,8 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
-import { withRouter } from "react-router-dom";
-import { registerUser, requestSession } from "../login.actions";
+import { requestSession } from "../login.actions";
 
 class LoginComponent extends React.Component<any, {}> {
   private username: string;

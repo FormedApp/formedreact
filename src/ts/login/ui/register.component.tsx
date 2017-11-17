@@ -1,8 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
-import { withRouter } from "react-router-dom";
-import { registerUser, requestSession } from "../login.actions";
+import { registerUser } from "../login.actions";
 
 interface User {
   firstName: string;
@@ -49,7 +48,12 @@ class RegisterComponent extends React.Component<any, {}> {
       password: this.password,
       user: this.user
     };
-    this.props.dispatch(registerUser(credentials));
+    if (this.password !== this.confirmPassword) {
+      // Add Validation
+      console.log("Passwords do not match");
+    } else {
+      this.props.dispatch(registerUser(credentials));
+    }
   }
 
   public handleUsername(event: React.SyntheticEvent<HTMLInputElement>) {
