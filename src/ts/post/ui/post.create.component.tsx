@@ -1,35 +1,35 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { SessionState } from "../../login/login.state";
-import { submitJournalEntry } from "../journal.actions";
+import { submitPostEntry } from "../post.actions";
 
-class JournalEntryComponent extends React.Component<any, {}> {
+class PostEntryComponent extends React.Component<any, {}> {
 
-  private entry: string;
+  private content: string;
   private myFormRef: HTMLFormElement;
   constructor(props: any) {
     super(props);
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleJournalEntry = this.handleJournalEntry.bind(this);
+    this.handlePostEntry = this.handlePostEntry.bind(this);
   }
 
   public handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
     const entry = {
-      entry: this.entry,
+      content: this.content,
       token: this.props.session.token
     };
-    this.props.dispatch(submitJournalEntry(entry));
+    this.props.dispatch(submitPostEntry(entry));
     this.myFormRef.reset();
   }
 
-  public handleJournalEntry(event: React.SyntheticEvent<HTMLTextAreaElement>) {
+  public handlePostEntry(event: React.SyntheticEvent<HTMLTextAreaElement>) {
     const target = event.target as HTMLTextAreaElement;
     if (target.value.length > 0) {
-      this.entry = target.value;
+      this.content = target.value;
     } else {
-      this.entry = "";
+      this.content = "";
     }
     this.setState({ update: true });
   }
@@ -43,7 +43,7 @@ class JournalEntryComponent extends React.Component<any, {}> {
               <fieldset className="form-group">
                 <textarea
                   className="form-control"
-                  onChange={this.handleJournalEntry}
+                  onChange={this.handlePostEntry}
                   />
               </fieldset>
               <fieldset className="form-group">
@@ -68,5 +68,5 @@ const mapStateToProps = (state: any) => ({
 });
 
 export default connect<StateFromProps, null, any>(mapStateToProps)(
-  JournalEntryComponent
+  PostEntryComponent
 );

@@ -1,9 +1,9 @@
-import journalLogic from "../journal/journal.logic";
 import loginLogic from "../login/login.logic";
+import postLogic from "../post/post.logic";
 import tracksLogic from "../tracks/tracks.logic";
 
 export default [
   ...loginLogic,
-  ...journalLogic,
+  ...postLogic,
   ...tracksLogic
 ];

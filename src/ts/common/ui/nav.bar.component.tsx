@@ -33,8 +33,8 @@ class NavBar extends React.Component<any, {}> {
               <li className="activity">
                 <a href="#">Activity</a>
               </li>
-              <li className="journal">
-                <a href="#">Journal</a>
+              <li className="post">
+                <a href="#">Post</a>
               </li>
               <li className="user">
                 <a href="#">User</a>

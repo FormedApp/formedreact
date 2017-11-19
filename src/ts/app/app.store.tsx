@@ -2,8 +2,8 @@ import axios from "axios";
 import {applyMiddleware, combineReducers, compose, createStore, Store} from "redux";
 import logger from "redux-logger";
 import {createLogicMiddleware} from "redux-logic";
-import { journals, JournalState } from "../journal/journal.state";
 import {session, SessionState} from "../login/login.state";
+import { posts, PostState } from "../post/post.state";
 import { tracks, TracksState } from "../tracks/tracks.state";
 import logic from "./root.logic";
 
@@ -15,7 +15,7 @@ const deps = { // injected dependencies for logic
 export interface AppState {
     // TODO the various component state property types go in here
     session: SessionState;
-    journals: JournalState;
+    posts: PostState;
     tracks: TracksState;
 }
 
@@ -27,7 +27,7 @@ export interface Action {
 const reducers = combineReducers({
     // TODO each components reducer goes in here
     session,
-    journals,
+    posts,
     tracks
 });
 

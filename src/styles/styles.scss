@@ -30,7 +30,7 @@ cursive;
     background: $dark-red;
 }
 
-.journal {
+.post {
     background: $orange;
 }
 
@@ -44,7 +44,7 @@ cursive;
 
 .community,
 .activity,
-.journal,
+.post,
 .user,
 .leader {
     &:hover,
