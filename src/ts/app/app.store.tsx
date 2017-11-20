@@ -2,6 +2,7 @@ import axios from "axios";
 import {applyMiddleware, combineReducers, compose, createStore, Store} from "redux";
 import logger from "redux-logger";
 import {createLogicMiddleware} from "redux-logic";
+import { groups, GroupState } from "../group/group.state";
 import {session, SessionState} from "../login/login.state";
 import { posts, PostState } from "../post/post.state";
 import { tracks, TracksState } from "../tracks/tracks.state";
@@ -17,6 +18,7 @@ export interface AppState {
     session: SessionState;
     posts: PostState;
     tracks: TracksState;
+    groups: GroupState;
 }
 
 export interface Action {
@@ -28,7 +30,8 @@ const reducers = combineReducers({
     // TODO each components reducer goes in here
     session,
     posts,
-    tracks
+    tracks,
+    groups
 });
 
 const logicMiddle = createLogicMiddleware(logic, deps);

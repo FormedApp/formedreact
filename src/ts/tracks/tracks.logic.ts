@@ -1,4 +1,5 @@
 import { createLogic } from "redux-logic";
+import { receiveActivities, REQUEST_ACTIVITIES } from "../activities/activities.actions";
 import { DELETE_TRACK, receiveTracks, REQUEST_TRACKS, SUBMIT_TRACK } from "./tracks.actions";
 
 const TRACKS = "http://localhost:8081/api/tracks";
@@ -79,4 +80,30 @@ const deleteTrackLogic = createLogic<any>({
   },
 });
 
-export default [submitTrackLogic, getUserTracksLogic, deleteTrackLogic];
+const getActivitiesByTrackIdLogic = createLogic<any>({
+  type: REQUEST_ACTIVITIES,
+
+  async process({ httpClient, action }, dispatch, done) {
+    console.log("action.payload", action.payload);
+    const token = action.payload.token;
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": token,
+      }
+    };
+    console.log("config", config);
+    try {
+      const result = await httpClient.get(TRACKS + `/${action.payload.trackId}`, config);
+      dispatch(receiveActivities(result.data.activities));
+    } catch (err) {
+      console.log(
+        "Error trying to get activities entries",
+        err,
+      );
+    }
+    done();
+  },
+});
+
+export default [submitTrackLogic, getUserTracksLogic, deleteTrackLogic, getActivitiesByTrackIdLogic];

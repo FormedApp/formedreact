@@ -1,43 +1,41 @@
 import * as _ from "lodash";
-import { Activity } from "../activities/activities.state";
 import { Action } from "../app/app.store";
 import { User } from "../common/user.model";
 import { Group } from "../group/group.state";
-import { FAIL_TRACKS, RECEIVE_TRACKS, REQUEST_TRACKS } from "./tracks.actions";
+import { FAIL_ACTIVITIES, RECEIVE_ACTIVITIES, REQUEST_ACTIVITIES } from "./activities.actions";
 
-export interface Track {
+export interface Activity {
     id: string;
     title: string;
     description: string;
     groups: Group[];
-    activities: Activity[];
     created_by: User;
     created_at: Date;
     updated_at: Date;
 }
 
-export interface TracksState {
+export interface ActivitiesState {
     loading: boolean;
-    trackEntries?: Track[];
+    activityEntries?: Activity[];
 }
 
-const initialState: TracksState = {
+const initialState: ActivitiesState = {
     loading: false,
-    trackEntries: [],
+    activityEntries: [],
 };
 
-export const tracks = (state: TracksState = initialState, action: Action): TracksState => {
+export const activities = (state: ActivitiesState = initialState, action: Action): ActivitiesState => {
     switch (action.type) {
-        case REQUEST_TRACKS:
+        case REQUEST_ACTIVITIES:
         return _.assign({}, state, {
             loading: false,
         });
-        case RECEIVE_TRACKS:
+        case RECEIVE_ACTIVITIES:
         return _.assign({}, state, {
                 loading: false,
-                trackEntries: action.payload
+                activityEntries: action.payload
             });
-        case FAIL_TRACKS:
+        case FAIL_ACTIVITIES:
         return _.assign({}, state, {
             loading: false,
         });

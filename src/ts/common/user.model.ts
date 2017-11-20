@@ -1,4 +1,4 @@
-import { Group } from "../group/group.model";
+import { Group } from "../group/group.state";
 import { Role } from "./role.model";
 
 export interface User {
