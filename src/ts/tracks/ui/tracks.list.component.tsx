@@ -1,5 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { SessionState } from "../../login/login.state";
 import { TracksState } from "../../tracks/tracks.state";
 import { deleteTrack, requestTracks } from "../tracks.actions";
@@ -11,8 +12,11 @@ interface TracksComponentProps {
   tracks: TracksState;
 }
 
-class TracksEntryListComponent extends React.Component<TracksComponentProps, {}> {
-  constructor(props){
+class TracksEntryListComponent extends React.Component<
+  TracksComponentProps,
+  {}
+> {
+  constructor(props) {
     super(props);
 
     this.deleteTrack = this.deleteTrack.bind(this);
@@ -21,7 +25,7 @@ class TracksEntryListComponent extends React.Component<TracksComponentProps, {}>
     this.props.dispatch(requestTracks(this.props.session.token));
   }
 
-  public deleteTrack(id: string){
+  public deleteTrack(id: string) {
     const entry = {
       id,
       token: this.props.session.token
@@ -30,12 +34,21 @@ class TracksEntryListComponent extends React.Component<TracksComponentProps, {}>
   }
 
   public renderTracksEntry(track: Track) {
-    return <div key={track.id}>{track.title} <button type="button" onClick={() => this.deleteTrack(track.id)}>Delete</button></div>;
+    return (
+      <div key={track.id}>
+        <Link to={`/tracks/${track.id}`}>{track.title}</Link>
+        <button type="button" onClick={() => this.deleteTrack(track.id)}>
+          Delete
+        </button>
+      </div>
+    );
   }
 
   public render() {
     console.log(this.props);
-    if (!this.props.tracks) { return null; }
+    if (!this.props.tracks) {
+      return null;
+    }
     const { trackEntries } = this.props.tracks;
     return (
       <div className="container">
@@ -48,6 +61,9 @@ class TracksEntryListComponent extends React.Component<TracksComponentProps, {}>
           ) : (
             <div>No Tracks</div>
           )}
+        </div>
+        <div>
+          <Link to={"/tracks/new"}>New Track</Link>
         </div>
       </div>
     );

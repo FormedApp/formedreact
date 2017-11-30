@@ -1,5 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class NavBar extends React.Component<any, {}> {
   public render() {
@@ -17,30 +18,33 @@ class NavBar extends React.Component<any, {}> {
             >
               <i className="fa fa-ellipsis-v" />
             </button>
-            <a className="navbar-brand" href="#">
+            <Link className="navbar-brand" to="/">
               <img
                 src={require("../../../assets/images/logo.png")}
                 width="45"
               />
-            </a>
+            </Link>
             <span className="view-title">Formed</span>
           </div>
           <div id="navbar" className="navbar-collapse collapse">
             <ul className="nav navbar-nav">
               <li className="community">
-                <a href="#">Community</a>
+                <Link to="/community">Community</Link>
               </li>
               <li className="activity">
-                <a href="#">Activity</a>
+                <Link to="/tracks">Tracks</Link>
+              </li>
+              <li className="activity">
+                <Link to="/groups">Groups</Link>
               </li>
               <li className="post">
-                <a href="#">Post</a>
+                <Link to="/">Post</Link>
               </li>
               <li className="user">
-                <a href="#">User</a>
+                <Link to="/user">User</Link>
               </li>
               <li className="leader">
-                <a href="#">Leader</a>
+                <Link to="#">Leader</Link>
               </li>
             </ul>
           </div>
